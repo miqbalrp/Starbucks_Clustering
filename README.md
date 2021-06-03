@@ -2,6 +2,8 @@
 
 This is a very interesting dataset that I found in Kaggle and Github (the primary source is from Udemy Project) about Starbucks' customer behaviour after receiving offer from Starbucks. <br>
 
+![WhatsApp Image 2021-06-03 at 10 34 19 AM](https://user-images.githubusercontent.com/38918617/120582925-7c355180-c457-11eb-9004-806d07ddab23.jpeg)
+
 Hope will give you more insight and experience by my analysis. Have fun!
 
 ## 1. **Data Preparation** ([prep.ipynb](https://github.com/miqbalrp/Starbucks_Clustering/blob/main/notebook/1.%20prep.ipynb))
