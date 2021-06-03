@@ -2,7 +2,9 @@
 
 This is a very interesting dataset that I found in Kaggle and Github (the primary source is from Udemy Project) about Starbucks' customer behaviour after receiving offer from Starbucks. <br>
 
-![WhatsApp Image 2021-06-03 at 10 34 19 AM](https://user-images.githubusercontent.com/38918617/120582925-7c355180-c457-11eb-9004-806d07ddab23.jpeg)
+<p align="center">
+  <img width="" height="400" src="https://user-images.githubusercontent.com/38918617/120599976-67b28280-c472-11eb-970d-47083e2c4bbd.jpeg">
+</p>
 
 Hope will give you more insight and experience by my analysis. Have fun!
 
