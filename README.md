@@ -13,37 +13,61 @@ Will be described soon.
 
 ## 2. **Exploration Data Analysis** ([eda.ipynb](https://github.com/miqbalrp/Starbucks_Clustering/blob/main/notebook/2.%20eda.ipynb))
 
-### Demographic Information
-![Individual Demographic Distribution](https://user-images.githubusercontent.com/38918617/120574281-3a051380-c449-11eb-9ac7-55bd1bfd2dce.png)
+## 3. **Clustering Using K-Means** ([clustering.ipynb](https://github.com/miqbalrp/Starbucks_Clustering/blob/main/notebook/3.%20clustering.ipynb))
 
-![Individual Demographic Relation](https://user-images.githubusercontent.com/38918617/120574302-44271200-c449-11eb-866d-6dd0ef85c0ec.png)
+### Determine The Best Number of Cluster
+![Elbow and Silhoute Method](https://user-images.githubusercontent.com/38918617/121834478-18cdde00-ccf9-11eb-8a13-bf646fe53f89.png)
 
-* As we can see above that most of customers are **male**, and followed by **female**. For other genders the number is very small so that in the next analysis **we will focus on male and female gender**.
-* The age of the customer follows a normal distribution where the data center around the age of 40-70. We can divide age data into 4 part: **youth** (<35), **middle** (35-48), **older** (48-80), and **senior** (80>)
-* From income distribution we can say that **lower-middle income** (30k-80k) has the largest number while **upper-middle income** (80k-10k) is the second largest number. The rest is the **high income** custome (10k>).
-* Scatter plot tells us that youth customer only has lower-middle income, middle age can be in a upper-middle one, and for high income only for older and senior customer.
+From SSE chart we can observe that value starts to be smooth (*arm* side) at either k=3 or k=4. <br>
+To get more confidence, we will use Silhouette Score where the value for k=3 is greater than k=4.<br> 
+Therefore we will choose **k=3** as the number of clusters.
 
-### Became a Member Trend
-![Became a Member Trend trough Time](https://user-images.githubusercontent.com/38918617/120574446-86e8ea00-c449-11eb-9d72-ccfd09e3947e.png)
-* In general, we can see that the daily trend of new member registrations **increased in the middle of 2015**. Then it **rose again in the middle of 2017** before **the decline in early 2018**.
-* From year to year more male customers become new members except in 2016 where there are slightly more female customers.
-* Older customers always dominate every year as does the lower-middle income group.
+![Number of Clusters](https://user-images.githubusercontent.com/38918617/121834678-8b3ebe00-ccf9-11eb-9ca3-b7f6a2d5bc2a.png)
 
-### Customer Spend Amount
-![Spend Amount Distribution](https://user-images.githubusercontent.com/38918617/120574643-e941ea80-c449-11eb-8ed5-f2cd54446ceb.png)
+From the results of clustering with k = 3, we get the number of customers who are evenly distributed ~5000 people per cluster.
 
-![Spend Amount by Demographic](https://user-images.githubusercontent.com/38918617/120574652-ee069e80-c449-11eb-9cec-fc221ad42554.png)
+The chart cluster exploration series from the [notebook](https://user-images.githubusercontent.com/38918617/121834678-8b3ebe00-ccf9-11eb-9ca3-b7f6a2d5bc2a.png) gives us an idea of the characteristics of each cluster.
 
-* First, for making sense of how amount distribution really is, we plot the histogram of amount. We get that small amount has the largest number of distribution and decrease to the large amount. From amount of 400 to 1600 we get really small number of customer that spend in that much, it must be our outlier for the next analysis (it can be prove from the next boxplot).
-* Second, we draw amount with demographic segementation in boxplot. 
-* We get here that even the female customer has less number of customer than male, but female customers spend more in transaction. 
-* By the age group, we get that youth customer tends to spend in small number of amount than any other groups.
-* As well ass the youth customer, the lower-middle also has the smallest number of amount. Since youth customer has lower-middle income, we can conclude a connection here.
+### Age and Gender
+* Customers with an older age (50-70) are mostly in cluster 0, while in clusters 1 and 2 are dominated by younger customers.
+* Although not significantly different, in each cluster it shows that the average age of women is older than men.
 
-### The Relation between How Many Offer Process Occur and the Transaction Amount
-![Number of Offer Relation with Spend Amount](https://user-images.githubusercontent.com/38918617/120574749-18585c00-c44a-11eb-96c3-0b8178b2ee69.png)
+### Seniority
+* In terms of seniority, cluster 0 and cluster 2 share a similar distribution where customers who became members in 2015-2016 are mostly spread across these two clusters. Meanwhile, customers who recently joined (in 2018) dominate in cluster 1.
 
-* The three charts above will show is there any difference on customer that received more offer and less offer to amount of transaction spend.
-* From visualization only (*statistical test can be conducted if needed*), we get that for customers that received more than two times offer tend to purchase in the relative some amount. But this fact is not true with viewed and completed offer where the more viewed and completed offer the more purchase amount.
+### Income
+* The distribution of income can be seen from the scatter plot of the comparison of income and amount.
+* Since most of the older customers are in cluster 0, we can also observe that the large income distribution (> 80,000) is in cluster 0.
+* For customers with income less than 80,000, they are divided into clusters 1 and 2 which are distinguished by the amount of transactions made.
 
+### Amount of Transaction
+* We use sum and average to aggregate the amount of transactions.
 
+* Cluster 1 and cluster 2 are well distinguished from the total amount where cluster 1 has a smaller total amount than cluster 2.
+
+* Although cluster 0 dominates the entire range of total amount with income > 80,000, customers with this cluster also have a smaller income but have a large total amount (> 400).
+
+* From the point of view of an average transaction, cluster 1 is in the upper right corner which indicates a customer with a high value in terms of income and average amount.
+
+* For cluster 1 and cluster 2, there is overlap in the average amount, but in general cluster 1 (as before) has a smaller value than cluster 2.
+
+### Possibility of Completing Offers
+* On the violin plot, it can be clearly seen that cluster 1 has a small probability of completion from both the BOGO and Discount offers.
+
+* Meanwhile, in Informational offers, the three clusters do not show a significant difference (keep in mind that specifically for informational offers, what is calculated is the number of views, different from other types of offers).
+
+* To be more specific in comparing cluster 0 and cluster 2, we will use a point plot that shows cluster 2 has a slightly higher average completion value.
+
+## 4. Conclusion and Recomendation
+The results of the cluster analysis obtained from the K-Means method above provide some insight to us. The offers that have been given previously, BOGO and Discount, should be focused on customer cluster 0 and and cluster 2 which gives a greater possibility to complete the offer compared to cluster 1.<br>
+
+When compared between cluster 0 and cluster 1, cluster 0 which is dominated by customers with an older age and high income provides the biggest profit (in terms of total amount and average amount per transaction). However, cluster 0 still has a slightly lower probability of completing the offer. This needs to be a concern for the next offer period. <br>
+
+We recommend continuing to investigate some variables that have not been discussed in this project. Among them is the role of channel giving offers. Is there any influence between offers via web, email, mobile, or social channels? In addition, we have not paid attention to the reward points and dificulty of each offer given. Some of these things are potentials that can be explored further in the next project.
+
+## 5. Dig Deeper
+In addition to Python notebooks, we have also created a dashboard using Tableau Public which can be accessed at the following link:
+
+https://public.tableau.com/app/profile/iqbal5898/viz/Starbucks_Clustering/StarbucksCustomerClustering
+
+![image](https://user-images.githubusercontent.com/38918617/121834826-ec669180-ccf9-11eb-8cb6-2c424ad338da.png)
